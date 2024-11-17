@@ -15,9 +15,17 @@ html{
 }
 
 html, body {
-    height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+@media (max-width: 995px) {
+    html, body {
+        overflow-x: hidden; 
+        overflow-y: auto;  
+    }
+}
+
+
 body{
     background-image: url('0.jpg'); 
     background-color: #ffffff; 
