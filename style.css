@@ -14,16 +14,7 @@ html{
     font-size: 62.5%;
 }
 
-html, body {
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-@media (max-width: 995px) {
-    html, body {
-        overflow-x: hidden; 
-        overflow-y: auto;  
-    }
-}
+
 
 
 body{
