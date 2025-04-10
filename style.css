@@ -14,21 +14,27 @@ html{
     font-size: 62.5%;
 }
 
-
-
-
-body{
-    background-image: url('0.jpg'); 
-    background-color: #ffffff; 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: repeat;
-    color: #000000; 
-    width: 100%;
-    height: 100vh;
-    overflow-x: hidden;
-    color: white;
+html, body {
+    height: 100vh; 
+    width: 100vw;  
+    overflow: hidden; 
+    margin: 0;
+    padding: 0;
 }
+
+
+
+body {
+    background-image: url('0.jpg'); 
+    background-size: 100% 100%; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color:white;
+}
+
 
 header{
     margin-top: 20px;
@@ -219,33 +225,33 @@ span{
 
 .typing-text span::after{
     content: "";
-   /* background-color: black;*/
+
     position: absolute;
     width: calc(100% + 8px);
     height: 100%;
     border-left: 3px solid black;
-    right: -8;
+
     animation: cursor 0.6s infinite;
 }
 
-@keyframes cursor{
-    to{
-        border-left: 3px solid #A7B500;
-    }
+@keyframes cursor {
+    0% { border-left: 3px solid black; }
+    50% { border-left: 3px solid transparent; }
+    100% { border-left: 3px solid #A7B500; }
 }
 
 @keyframes words{
 
-    0%, 33%{
+    0%, 25%{
         content: "Developer";
     }
-    33%, 50%{
+    25%, 50%{
         content: "Cinephile";
     }
-    33%, 66%{
+    50%, 75%{
         content: "Ui/Ux Designer";
     }
-    66%, 100%{
+    75%, 100%{
         content: "Gamer";
     }
 
@@ -276,3 +282,51 @@ span{
         margin-top: 4rem;
     }
 }
+
+@media (max-width: 768px) {
+    body {
+        background-size: auto 100%; 
+        background-position: center center;
+        overflow: hidden; 
+    }
+
+    .home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100vh; 
+        gap: 1.5rem;
+        padding: 0 1rem; 
+    }
+
+    .home-img img {
+        width: 45vw; 
+        height: 45vw;
+        max-width: 180px;
+        max-height: 180px;
+        border-radius: 50%; 
+        object-fit: cover;
+        position: relative;
+        top: -10vh;
+    }
+
+    .home-content {
+        margin-top: 0; 
+    }
+
+    .home-content h1 {
+        font-size: 3rem; 
+    }
+
+    .home-content h3 {
+        font-size: 2rem;
+    }
+
+    .home-content p {
+        font-size: 1.2rem;
+        padding: 0 15px;
+    }
+}
+
