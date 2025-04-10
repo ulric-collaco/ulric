@@ -282,49 +282,56 @@ span{
         margin-top: 4rem;
     }
 }
-
 @media (max-width: 768px) {
-    body {
-        background-size: auto 100%;
-        background-position: center center;
-        overflow: hidden; 
-        padding: 0;
+    html, body {
+        width: 100%;
+        height: 100%;
         margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevents horizontal scroll */
+        overflow-y: auto; /* Allows vertical scroll */
+        background-size: cover;
+        background-position: center center;
+        display: flex;
+        justify-content: center;
     }
 
     .home {
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         text-align: center;
-        height: 100vh; 
-        gap: 1.5rem;
-        padding: 0 5vw;
-        width: 100vw; 
-        box-sizing: border-box; 
+        min-height: 100vh; /* Ensures full height */
+        width: 100vw; /* Takes full width */
+        padding: 2rem 5vw;
+        box-sizing: border-box; /* Ensures padding doesn't add extra width */
     }
 
     .home-img img {
-        width: 45vw; 
-        height: 45vw;
-        max-width: 180px;
-        max-height: 180px;
-        border-radius: 50%; 
+        width: 40vw; 
+        height: 40vw;
+        max-width: 160px;
+        max-height: 160px;
+        border-radius: 50%;
         object-fit: cover;
-        position: relative;
-        top: -10vh;
+        margin-bottom: 1rem; /* Prevents overlap */
     }
 
     .home-content {
-        margin-top: 0; 
-        width: 90%; 
+        width: 90%;
         max-width: 100%;
+        padding-bottom: 2rem; /* Prevents bottom whitespace */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .home-content h1 {
-        font-size: 3rem; 
-        white-space: wrap; 
+        font-size: 3rem;
+        white-space: wrap;
+        text-align: center;
     }
 
     .home-content h3 {
@@ -334,9 +341,21 @@ span{
     .home-content p {
         font-size: 1.2rem;
         padding: 0;
-        width: 100%; 
+        width: 100%;
         text-align: center;
-    } 
+    }
+
+    /* Fix white bar issue */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
 }
-
-
