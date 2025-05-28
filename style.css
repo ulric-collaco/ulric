@@ -296,6 +296,14 @@ span{
         justify-content: center;
     }
 
+    /* New rule for background image below 768px */
+    body {
+        background-image: url('1.jpg'); /* Use the smaller image */
+        background-size: cover; /* Ensure it covers the background */
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     .home {
         display: flex;
         flex-direction: column;
@@ -309,7 +317,7 @@ span{
     }
 
     .home-img img {
-        width: 40vw; 
+        width: 40vw;
         height: 40vw;
         max-width: 160px;
         max-height: 160px;
