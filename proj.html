@@ -47,6 +47,11 @@
             gap: 2rem;
             width: 100%;
         }
+        .project-link { /* New style for the anchor tag wrapping the card */
+            text-decoration: none; /* Remove underline from links */
+            color: inherit; /* Inherit text color */
+            display: block; /* Make the anchor a block element */
+        }
         .project-card {
             background-color: rgba(22, 22, 22, 0.8); /* Slightly transparent background like in index.html */
             border-radius: 15px;
@@ -97,21 +102,25 @@
         <div class="year-section">
             <h2 class="year-heading">First Year Projects</h2>
             <div class="project-cards-grid">
-                <div class="project-card">
-                    <img src="path/to/hardware_project_image.jpg" alt="Hardware Project">
-                    <div class="project-info">
-                        <h3>Hardware Project Title</h3>
-                        <p>Brief description of your hardware project.</p>
+                <a href="https://www.linkedin.com/pulse/esp32-gyro-controlled-car-my-first-year-hardware-project-collaco-jncof" class="project-link"> <!-- Link wrapping the card -->
+                    <div class="project-card">
+                        <img src="h1.jpg" alt="Hardware Project">
+                        <div class="project-info">
+                            <h3>Gyro Controlled Car</h3>
+                            <p>Smartphone Gyro-Controlled ESP32 Car.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="project-card">
-                    <img src="path/to/software_project_image.jpg" alt="Software Project">
-                    <div class="project-info">
-                        <h3>Software Project Title</h3>
-                        <p>Brief description of your software project.</p>
+                <a href="javascript:void(0);" class="project-link"> <!-- Link wrapping the card -->
+                    <div class="project-card">
+                        <img src="path/to/software_project_image.jpg" alt="Software Project">
+                        <div class="project-info">
+                            <h3>Software Project Title</h3>
+                            <p>Brief description of your software project.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
                 <!-- Add more first-year project cards here -->
             </div>
         </div>
