@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <title>My Projects</title>
+  <style>
+    html { /* Ensure html tag allows overflow */
+      overflow-y: auto;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 2rem; /* Add some padding at the top */
+      overflow-y: auto; /* Allow vertical scrolling for the body */
+    }
+    .projects-container {
+      display: flex;
+      flex-direction: column; /* Changed to column to stack year sections */
+      align-items: center; /* Center year sections */
+      gap: 3rem; /* Increased gap between year sections */
+      padding: 2rem;
+      width: 100%;
+      max-width: 1200px; /* Max width for the container */
+    }
+    .year-section { /* New style for year sections */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .year-heading { /* New style for year headings */
+      font-size: 3rem;
+      color: white;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #A7B500;
+      padding-bottom: 0.5rem;
+    }
+    .project-cards-grid { /* New style for the grid of cards within a year */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      width: 100%;
+    }
+    .project-link { /* New style for the anchor tag wrapping the card */
+      text-decoration: none; /* Remove underline from links */
+      color: inherit; /* Inherit text color */
+      display: block; /* Make the anchor a block element */
+    }
+    .project-card {
+      background-color: rgba(22, 22, 22, 0.8); /* Slightly transparent background like in index.html */
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(167, 181, 0, 0.5); /* Adjusted shadow to match theme */
+      overflow: hidden;
+      width: 300px; /* Fixed width for cards */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center content horizontally */
+      padding: 1.5rem; /* Padding inside the card */
+    }
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 0 35px rgba(167, 181, 0, 0.7);
+    }
+    .project-card img {
+      width: 100%;
+      height: 200px; /* Fixed height for images */
+      object-fit: cover; /* Ensure image covers the area */
+      border-bottom: 3px solid #A7B500; /* Accent border */
+      border-radius: 10px 10px 0 0; /* Rounded top corners for the image */
+    }
+    .project-card .project-info {
+      padding: 1rem;
+      text-align: center; /* Center text */
+    }
+    .project-card h3 {
+      font-size: 2.2rem;
+      color: #A7B500; /* Accent color for title */
+      margin-bottom: 0.5rem;
+    }
+    .project-card p {
+      font-size: 1.4rem;
+      color: #f0f0f0; /* Lighter text color */
+    }
+    .back-btn {
+      margin-top: 2rem;
+      margin-bottom: 2rem; /* Space below the button */
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="btn back-btn">Back to Home</a>
+
+  <div class="projects-container">
+    <div class="year-section">
+      <h2 class="year-heading">First Year Projects</h2>
+      <div class="project-cards-grid">
+        <a href="https://www.linkedin.com/pulse/esp32-gyro-controlled-car-my-first-year-hardware-project-collaco-jncof" class="project-link"> <!-- Link wrapping the card -->
+          <div class="project-card">
+            <img src="/h1.jpg" alt="Hardware Project">
+            <div class="project-info">
+              <h3>Gyro Controlled Car</h3>
+              <p>Smartphone Gyro-Controlled ESP32 Car.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="javascript:void(0);" class="project-link"> <!-- Link wrapping the card -->
+          <div class="project-card">
+            <img src="/path/to/software_project_image.jpg" alt="Software Project">
+            <div class="project-info">
+              <h3>Software Project Title</h3>
+              <p>Brief description of your software project.</p>
+            </div>
+          </div>
+        </a>
+        <!-- Add more first-year project cards here -->
+      </div>
+    </div>
+
+    <div class="year-section">
+      <h2 class="year-heading">Second Year Projects</h2>
+      <div class="project-cards-grid">
+        <!-- Add second-year project cards here when ready -->
+        <p style="color: #ccc; font-size: 1.6rem;">Projects coming soon...</p>
+      </div>
+    </div>
+
+    <div class="year-section">
+      <h2 class="year-heading">Third Year Projects</h2>
+      <div class="project-cards-grid">
+        <!-- Add third-year project cards here when ready -->
+        <p style="color: #ccc; font-size: 1.6rem;">Projects coming soon...</p>
+      </div>
+    </div>
+
+    <div class="year-section">
+      <h2 class="year-heading">Fourth Year Projects</h2>
+      <div class="project-cards-grid">
+        <!-- Add fourth-year project cards here when ready -->
+        <p style="color: #ccc; font-size: 1.6rem;">Projects coming soon...</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
