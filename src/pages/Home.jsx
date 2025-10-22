@@ -41,7 +41,7 @@ export default function Home() {
             <a href="https://www.linkedin.com/in/ulric-collaco/" target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-linkedin"></i></a>
         </div>
 
-          <Link to="/projects" target="_blank" rel="noreferrer" className="btn">My Projects</Link>
+          <Link to="/projects" className="btn">My Projects</Link>
       </div>
     </section>
   )

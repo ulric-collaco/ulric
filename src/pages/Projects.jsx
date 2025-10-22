@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <div className="projects-page">
       <div className="projects-header">
-  <Link to="/" target="_blank" rel="noreferrer" className="btn back-btn">Back to Home</Link>
+  <Link to="/" className="btn back-btn">Back to Home</Link>
       </div>
 
       <div className="projects-container">
