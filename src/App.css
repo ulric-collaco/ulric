@@ -126,7 +126,8 @@ section{
     min-height: 100vh; 
     min-height: 100svh; 
     position: relative; 
-    overflow: hidden
+    overflow: hidden;
+    padding: 0; /* override section default padding to avoid bottom gap */
 }
 
 /* Background canvas overlay for home */
@@ -282,7 +283,7 @@ span{
 @media(max-width:995px){
     .home{
         flex-direction: column;
-        margin: 5rem 4rem;
+        margin: 0;
     }
 
     .home .home-content h3{
@@ -326,7 +327,7 @@ span{
         text-align: center;
         min-height: 100svh;
         width: 100%; /* Avoid 100vw scrollbar offset */
-        margin: 0 auto; /* Center the container */
+        margin: 0; /* no external margins to prevent background gaps */
         gap: 2rem; /* Tighter spacing on small screens */
         padding: 2rem 5vw;
         box-sizing: border-box; /* Ensures padding doesn't add extra width */
