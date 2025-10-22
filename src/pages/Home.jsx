@@ -8,7 +8,7 @@ export default function Home() {
     <section className="home">
       <div className="home-bg">
         <LiquidEther
-          colors={['#00ffc8ff', '#A7B500']}
+          colors={['#0eeb54ff', '#00ffe5ff']}
           mouseForce={30}
           cursorSize={100}
           isViscous={false}
