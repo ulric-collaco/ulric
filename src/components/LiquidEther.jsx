@@ -240,18 +240,6 @@ export default function LiquidEther({
         if (event.touches.length === 1) {
           const t = event.touches[0]
           if (this.onInteract) this.onInteract()
-          // prevent page scroll while interacting within the container bounds
-          if (this.container) {
-            const r = this.container.getBoundingClientRect()
-            this.isHoverInside =
-              t.pageX >= r.left + window.scrollX &&
-              t.pageX <= r.right + window.scrollX &&
-              t.pageY >= r.top + window.scrollY &&
-              t.pageY <= r.bottom + window.scrollY
-            if (this.isHoverInside) {
-              try { event.preventDefault() } catch (e) {}
-            }
-          }
           this.setCoords(t.pageX, t.pageY)
           this.hasUserControl = true
         }
@@ -260,17 +248,6 @@ export default function LiquidEther({
         if (event.touches.length === 1) {
           const t = event.touches[0]
           if (this.onInteract) this.onInteract()
-          if (this.container) {
-            const r = this.container.getBoundingClientRect()
-            this.isHoverInside =
-              t.pageX >= r.left + window.scrollX &&
-              t.pageX <= r.right + window.scrollX &&
-              t.pageY >= r.top + window.scrollY &&
-              t.pageY <= r.bottom + window.scrollY
-            if (this.isHoverInside) {
-              try { event.preventDefault() } catch (e) {}
-            }
-          }
           this.setCoords(t.pageX, t.pageY)
         }
       }

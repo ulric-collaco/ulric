@@ -15,17 +15,19 @@ html{
 }
 
 html, body {
-    height: 100vh; 
-    width: 100vw;  
-    overflow: hidden; 
+    min-height: 100vh;
+    min-height: 100svh; /* safe viewport on mobile */
+    width: 100%;
+    overflow-x: hidden; 
     margin: 0;
     padding: 0;
+    background-color: #000; /* avoid white gaps */
 }
 
 
 body {
     background-image: url('/0.jpg'); 
-    background-size: 100% 100%; 
+    background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
     width: 100vw;
@@ -120,8 +122,9 @@ section{
     justify-content: center;
     align-items: center;
     gap: 8rem;
-    width: 100vw; 
+    width: 100%; 
     min-height: 100vh; 
+    min-height: 100svh; 
     position: relative; 
     overflow: hidden
 }
@@ -130,7 +133,7 @@ section{
 .home .home-bg{
     position: absolute;
     inset: 0;
-    z-index: -1; /* ensure it sits behind content */
+    z-index: 0; /* behind content but above page background */
     pointer-events: none; /* do not block interactions */
 }
 
@@ -298,7 +301,7 @@ span{
 @media (max-width: 768px) {
     html, body {
         width: 100%;
-        height: 100%;
+        min-height: 100svh;
         margin: 0;
         padding: 0;
         overflow-x: hidden; /* Prevents horizontal scroll */
@@ -321,8 +324,7 @@ span{
         justify-content: center;
         align-items: center;
         text-align: center;
-        min-height: 100vh; /* Fallback */
-        min-height: 100svh; /* Better mobile vh */
+        min-height: 100svh;
         width: 100%; /* Avoid 100vw scrollbar offset */
         margin: 0 auto; /* Center the container */
         gap: 2rem; /* Tighter spacing on small screens */
