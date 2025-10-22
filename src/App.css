@@ -126,6 +126,20 @@ section{
     overflow: hidden
 }
 
+/* Background canvas overlay for home */
+.home .home-bg{
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* ensure it sits behind content */
+    pointer-events: none; /* do not block interactions */
+}
+
+.home .home-content,
+.home .home-img{
+    position: relative;
+    z-index: 1;
+}
+
 .home .home-content h1{
     font-size: 6rem;
     font-weight: 700;
