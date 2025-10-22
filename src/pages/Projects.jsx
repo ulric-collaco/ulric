@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './projects.css'
+import h1 from '../../h1.jpg'
 
 export default function Projects() {
   return (
@@ -20,7 +21,7 @@ export default function Projects() {
               rel="noopener noreferrer"
             >
               <div className="project-card">
-                <img src="/h1.jpg" alt="Hardware Project" />
+                <img src={h1} alt="Hardware Project" />
                 <div className="project-info">
                   <h3>Gyro Controlled Car</h3>
                   <p>Smartphone Gyro-Controlled ESP32 Car.</p>
