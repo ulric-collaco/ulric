@@ -352,6 +352,8 @@ span{
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding-inline: 6vw; /* add breathing room on the sides */
+        box-sizing: border-box;
     }
 
     .home-content h1 {
