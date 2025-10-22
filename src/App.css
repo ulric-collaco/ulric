@@ -306,7 +306,7 @@ span{
         margin: 0;
         padding: 0;
         overflow-x: hidden; /* Prevents horizontal scroll */
-        overflow-y: auto; /* Allows vertical scroll */
+        overflow-y: hidden; /* Disable vertical scroll on mobile */
         background-size: cover;
         background-position: center center;
     }
@@ -329,7 +329,7 @@ span{
         width: 100%; /* Avoid 100vw scrollbar offset */
         margin: 0; /* no external margins to prevent background gaps */
         gap: 2rem; /* Tighter spacing on small screens */
-        padding: 2rem 5vw;
+        padding: 0; /* remove padding to avoid any extra scroll */
         box-sizing: border-box; /* Ensures padding doesn't add extra width */
     }
 
