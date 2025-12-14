@@ -29,12 +29,17 @@ export default function Projects() {
               </div>
             </a>
 
-            <a href="javascript:void(0);" className="project-link" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.linkedin.com/posts/ulric-collaco_my-first-major-software-project-chatrtx-activity-7405875933292916737-zImQ"
+              className="project-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="project-card">
-                <img src="/path/to/software_project_image.jpg" alt="Software Project" />
+                <img src="/chatrtx.png" alt="ChatRTX project" />
                 <div className="project-info">
-                  <h3>Software Project Title</h3>
-                  <p>Brief description of your software project.</p>
+                  <h3>ChatRTX (Software Project)</h3>
+                  <p>My first major software project — ChatRTX, an Ollama wrapper and chat UI.</p>
                 </div>
               </div>
             </a>
