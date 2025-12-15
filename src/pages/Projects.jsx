@@ -38,8 +38,8 @@ export default function Projects() {
               <div className="project-card">
                 <img src="/chatrtx.png" alt="ChatRTX project" />
                 <div className="project-info">
-                  <h3>ChatRTX (Software Project)</h3>
-                  <p>My first major software project — ChatRTX, an Ollama wrapper and chat UI.</p>
+                  <h3>ChatRTX Clone</h3>
+                  <p>ChatRTX, an Ollama wrapper self hosted study assistant.</p>
                 </div>
               </div>
             </a>
