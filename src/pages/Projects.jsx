@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './projects.css'
 import h1 from '../../h1.jpg'
+import chatrtx from '../../chatrtx.png'
 
 export default function Projects() {
   return (
@@ -36,7 +37,7 @@ export default function Projects() {
               rel="noopener noreferrer"
             >
               <div className="project-card">
-                <img src="/chatrtx.png" alt="ChatRTX project" />
+                <img src={chatrtx} alt="ChatRTX project" />
                 <div className="project-info">
                   <h3>ChatRTX Clone</h3>
                   <p>ChatRTX, an Ollama wrapper self hosted study assistant.</p>
