@@ -36,68 +36,27 @@ export default function LiquidEther({
     if (!mountRef.current) return
 
     function makePaletteTexture(stops) {
-      // Normalize stops: accept string or array; duplicate single; filter invalid
-      let arr
-      if (typeof stops === 'string') {
-        arr = [stops]
-      } else if (Array.isArray(stops)) {
-        arr = stops
-      }
-
-      if (!Array.isArray(arr) || arr.length === 0) {
-        console.warn('[LiquidEther] Invalid colors prop; falling back to white palette')
-        arr = ['#ffffff', '#ffffff']
-      }
-
-      // Validate entries and allow hex without leading '#';
-      // also accept 4/8-digit hex (RGBA) by dropping the alpha channel
-      const valid = []
-      for (let s of arr) {
-        if (typeof s !== 'string') continue
-        s = s.trim()
-        // Handle bare 6/3 hex
-        if (/^[0-9A-Fa-f]{6}$/.test(s) || /^[0-9A-Fa-f]{3}$/.test(s)) {
-          s = `#${s}`
+      let arr;
+      if (Array.isArray(stops) && stops.length > 0) {
+        if (stops.length === 1) {
+          arr = [stops[0], stops[0]];
+        } else {
+          arr = stops;
         }
-        // Handle 8/4 digit hex (with or without #) by stripping alpha
-        const m8 = s.match(/^#?([0-9A-Fa-f]{8})$/)
-        if (m8) {
-          const rgb = m8[1].slice(0, 6)
-          s = `#${rgb}`
-        }
-        const m4 = s.match(/^#?([0-9A-Fa-f]{4})$/)
-        if (m4) {
-          const rgb = m4[1].slice(0, 3)
-          s = `#${rgb}`
-        }
-        try {
-          // test parsability
-          // eslint-disable-next-line no-new
-          new THREE.Color(s)
-          valid.push(s)
-        } catch (e) {
-          // ignore invalid entries
-        }
+      } else {
+        arr = ['#ffffff', '#ffffff'];
       }
-      if (valid.length === 0) {
-        console.warn('[LiquidEther] No valid color stops; falling back to white palette')
-        valid.push('#ffffff', '#ffffff')
-      } else if (valid.length === 1) {
-        valid.push(valid[0])
-      }
-
-      arr = valid
-      const w = arr.length
-      const data = new Uint8Array(w * 4)
+      const w = arr.length;
+      const data = new Uint8Array(w * 4);
       for (let i = 0; i < w; i++) {
-        const c = new THREE.Color(arr[i])
-        data[i * 4 + 0] = Math.round(c.r * 255)
-        data[i * 4 + 1] = Math.round(c.g * 255)
-        data[i * 4 + 2] = Math.round(c.b * 255)
-        data[i * 4 + 3] = 255
+        const c = new THREE.Color(arr[i]);
+        data[i * 4 + 0] = Math.round(c.r * 255);
+        data[i * 4 + 1] = Math.round(c.g * 255);
+        data[i * 4 + 2] = Math.round(c.b * 255);
+        data[i * 4 + 3] = 255;
       }
-      const tex = new THREE.DataTexture(data, w, 1, THREE.RGBAFormat)
-      tex.magFilter = THREE.LinearFilter
+      const tex = new THREE.DataTexture(data, w, 1, THREE.RGBAFormat);
+      tex.magFilter = THREE.LinearFilter;
       tex.minFilter = THREE.LinearFilter
       tex.wrapS = THREE.ClampToEdgeWrapping
       tex.wrapT = THREE.ClampToEdgeWrapping
@@ -1190,5 +1149,10 @@ export default function LiquidEther({
     autoRampDuration,
   ])
 
-  return <div ref={mountRef} className={`liquid-ether-container ${className || ''}`} style={style} />
+  return (
+    <div
+      ref={mountRef}
+      className={`liquid-ether-container ${className || ''}`}
+      style={style} />
+  );
 }
