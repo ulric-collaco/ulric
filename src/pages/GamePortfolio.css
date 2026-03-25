@@ -1,0 +1,477 @@
+/* ─────────────────────────────────────────────
+   GamePortfolio.css  –  warm low-poly game UI
+   ───────────────────────────────────────────── */
+
+/* Root: full-screen, no scroll, covers everything */
+.gp-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: #EFE0C2;
+}
+
+/* Three.js canvas filler */
+.gp-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gp-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+/* ─────────────────────────────────────────────
+   Loading screen
+   ───────────────────────────────────────────── */
+.gp-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  background: #EFE0C2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gp-loading-inner {
+  text-align: center;
+  color: #6b5a3a;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.gp-loading-inner p {
+  margin-top: 1.6rem;
+  letter-spacing: 0.05em;
+}
+
+/* Animated low-poly car made with CSS */
+.gp-loading-car {
+  width: 80px;
+  height: 42px;
+  background: #A7B500;
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+  margin: 0 auto;
+  animation: gp-car-bounce 0.9s ease-in-out infinite;
+}
+
+.gp-loading-car::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 12px;
+  width: 50px;
+  height: 24px;
+  background: #8A9600;
+  border-radius: 8px 8px 0 0;
+}
+
+.gp-loading-car::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 8px;
+  width: 18px;
+  height: 18px;
+  background: #4A4A4A;
+  border-radius: 50%;
+  box-shadow: 46px 0 0 #4A4A4A;
+}
+
+@keyframes gp-car-bounce {
+  0%, 100% { transform: translateY(0)    rotate(-1deg); }
+  50%       { transform: translateY(-10px) rotate(1deg);  }
+}
+
+/* ─────────────────────────────────────────────
+   HUD  –  Exit button
+   ───────────────────────────────────────────── */
+.gp-exit-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 50;
+  padding: 0.9rem 2rem;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 100px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #3a2e1a;
+  text-decoration: none;
+  border: 2px solid rgba(167, 181, 0, 0.35);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.12);
+  transition: all 0.22s ease;
+  cursor: pointer;
+}
+
+.gp-exit-btn:hover {
+  background: #A7B500;
+  color: #fff;
+  border-color: #A7B500;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(167, 181, 0, 0.45);
+}
+
+/* ─────────────────────────────────────────────
+   HUD  –  Controls hint
+   ───────────────────────────────────────────── */
+.gp-hint {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 0.7rem 1.8rem;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 100px;
+  font-size: 1.25rem;
+  color: #6b5a3a;
+  font-weight: 500;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.6s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gp-hint--hidden {
+  opacity: 0;
+}
+
+.gp-hint-desktop { display: inline; }
+.gp-hint-mobile  { display: none;   }
+
+@media (hover: none) and (pointer: coarse) {
+  .gp-hint-desktop { display: none;   }
+  .gp-hint-mobile  { display: inline; }
+}
+
+/* ─────────────────────────────────────────────
+   HUD  –  Zone badge
+   ───────────────────────────────────────────── */
+.gp-zone-badge {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 0.5rem 1.6rem;
+  background: rgba(167, 181, 0, 0.9);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border-radius: 100px;
+  box-shadow: 0 4px 16px rgba(167, 181, 0, 0.4);
+  animation: gp-badge-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  pointer-events: none;
+}
+
+@keyframes gp-badge-in {
+  from { opacity: 0; transform: translateX(-50%) scale(0.7); }
+  to   { opacity: 1; transform: translateX(-50%) scale(1);   }
+}
+
+/* ─────────────────────────────────────────────
+   Touch joystick
+   ───────────────────────────────────────────── */
+.gp-joystick-area {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  z-index: 110;  /* above the side panel */
+  width: 140px;
+  height: 140px;
+  display: none;           /* visible only on touch via media query below */
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .gp-joystick-area { display: flex; }
+
+  /* move hint above joystick on mobile */
+  .gp-hint { bottom: 200px; }
+}
+
+.gp-joystick-base {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  border: 3px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.gp-joystick-base.active {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(167, 181, 0, 0.7);
+}
+
+.gp-joystick-nub {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #A7B500;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  transition: transform 0.04s linear;
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────────
+   Zone side panel
+   ───────────────────────────────────────────── */
+.gp-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 340px;
+  z-index: 100;
+  background: rgba(255, 253, 246, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 3px solid #A7B500;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.22);
+  padding: 5.6rem 2.6rem 3rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: gp-panel-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes gp-panel-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.gp-panel-close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.6rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: #f0ede4;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.18s;
+  line-height: 1;
+}
+
+.gp-panel-close:hover {
+  background: #A7B500;
+  border-color: #A7B500;
+  color: #fff;
+}
+
+.gp-card-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #A7B500;
+}
+
+/* ─────────────────────────────────────────────
+   Projects zone
+   ───────────────────────────────────────────── */
+.gp-proj-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.gp-proj-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.8rem;
+  border-radius: 14px;
+  border: 2px solid color-mix(in srgb, var(--card-accent) 30%, #e8e8e8);
+  background: color-mix(in srgb, var(--card-accent) 10%, #fff);
+  text-decoration: none;
+  transition: all 0.22s ease;
+  cursor: pointer;
+}
+
+.gp-proj-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  background: color-mix(in srgb, var(--card-accent) 18%, #fff);
+}
+
+.gp-proj-card-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-bottom: 0.2rem;
+}
+
+.gp-proj-card h3 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.gp-proj-card p {
+  font-size: 1.35rem;
+  color: #555;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.gp-proj-link {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #A7B500;
+  margin-top: 0.3rem;
+}
+
+/* ─────────────────────────────────────────────
+   About zone
+   ───────────────────────────────────────────── */
+.gp-about-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #A7B500;
+  margin-bottom: 1rem;
+}
+
+.gp-about-bio {
+  font-size: 1.45rem;
+  color: #444;
+  line-height: 1.75;
+  margin-bottom: 1.8rem;
+}
+
+.gp-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.gp-skill-tag {
+  padding: 0.45rem 1.2rem;
+  background: rgba(167, 181, 0, 0.08);
+  border: 1.5px solid rgba(167, 181, 0, 0.4);
+  border-radius: 100px;
+  font-size: 1.25rem;
+  color: #5a5a3a;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.gp-skill-tag:hover {
+  background: rgba(167, 181, 0, 0.2);
+}
+
+/* ─────────────────────────────────────────────
+   Contact zone
+   ───────────────────────────────────────────── */
+.gp-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.gp-contact-link {
+  display: block;
+  padding: 1.4rem 2rem;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--link-color) 8%, #fff);
+  border: 2px solid color-mix(in srgb, var(--link-color) 25%, #e8e8e8);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.gp-contact-link:hover {
+  background: var(--link-color);
+  color: #fff;
+  transform: translateX(6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* ─────────────────────────────────────────────
+   Playground zone
+   ───────────────────────────────────────────── */
+.gp-playground-msg {
+  font-size: 1.5rem;
+  color: #6b4f2a;
+  line-height: 1.75;
+  margin-top: 0.4rem;
+  white-space: pre-line;
+}
+
+/* ─────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .gp-panel {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 62vh;
+    border-left: none;
+    border-top: 3px solid #A7B500;
+    border-radius: 20px 20px 0 0;
+    padding: 2.8rem 2rem 2rem;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    animation: gp-panel-bottom-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes gp-panel-bottom-in {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  .gp-panel-close {
+    top: 1.2rem;
+    right: 1.4rem;
+  }
+
+  .gp-card-title { font-size: 2rem; }
+  .gp-proj-card  { padding: 1.4rem; }
+
+  .gp-exit-btn {
+    top: 12px;
+    left: 12px;
+    font-size: 1.3rem;
+    padding: 0.75rem 1.6rem;
+  }
+}
