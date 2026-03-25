@@ -183,8 +183,8 @@ export default class GameWorld {
     const sun = new THREE.DirectionalLight('#FFE0A0', 2.6)
     sun.position.set(20, 30, 15)
     sun.castShadow = true
-    sun.shadow.mapSize.width  = 4096
-    sun.shadow.mapSize.height = 4096
+    sun.shadow.mapSize.width  = 2048
+    sun.shadow.mapSize.height = 2048
     sun.shadow.camera.near   = 0.5
     sun.shadow.camera.far    = 160
     const s = 65
