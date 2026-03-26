@@ -4,7 +4,6 @@ import { BrowserRouter, useLocation } from 'react-router-dom'
 import App from './App'
 import './App.css'
 
-const EDITORIAL_ROUTES = []
 const GAME_ROUTES = ['/game']
 
 function BodyClassSetter() {
@@ -12,9 +11,7 @@ function BodyClassSetter() {
 
   useEffect(() => {
     const path = location.pathname
-    if (EDITORIAL_ROUTES.includes(path)) {
-      document.body.className = 'editorial-page'
-    } else if (GAME_ROUTES.includes(path)) {
+    if (GAME_ROUTES.includes(path)) {
       document.body.className = 'game-page'
     } else {
       document.body.className = 'home-page'

@@ -224,6 +224,8 @@ export default function GamePortfolio() {
           <div className="gp-loading-inner">
             <div className="gp-loading-car" aria-hidden="true" />
             <p>Loading world…</p>
+            <h1 style={{ fontWeight: 'bold', fontSize: '2rem', marginTop: '1rem', textAlign: 'center' }}>THIS IS A BIG WORK IN PROGRESS</h1>
+            <p style={{ marginTop: '0.5rem', opacity: 0.8, textAlign: 'center' }}>Does not work on mobile</p>
           </div>
         </div>
       )}

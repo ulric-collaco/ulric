@@ -10,18 +10,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html{
+html {
     font-size: 62.5%;
 }
 
 html, body {
     min-height: 100vh;
-    min-height: 100svh; /* safe viewport on mobile */
+    min-height: 100svh;
     width: 100%;
-    overflow-x: hidden; 
     margin: 0;
     padding: 0;
-    background-color: #000; /* avoid white gaps */
+    background-color: #000;
 }
 
 
@@ -41,15 +40,21 @@ body.home-page {
     overflow: hidden;
 }
 
-/* Landing pages need scroll and no background image */
-body.editorial-page {
+/* Landing/home pages need scroll and no background image */
+body.home-page {
     background: none;
     background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100svh;
+    color: inherit;
+}
+
+html:has(body.home-page) {
     overflow-y: auto;
     overflow-x: hidden;
     height: auto;
-    min-height: 100vh;
-    color: inherit;
 }
 
 
