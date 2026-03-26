@@ -8,10 +8,10 @@ import '../styles/home.css'
 
 export default function Home() {
   const [isDark, setIsDark] = useState(() => {
-    // Respect saved preference, fallback to system preference
+    // Respect saved preference, fallback to light mode
     const saved = localStorage.getItem('ed-theme')
     if (saved) return saved === 'dark'
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
+    return false // Default is light mode
   })
 
   useEffect(() => {
