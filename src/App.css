@@ -26,14 +26,30 @@ html, body {
 
 
 body {
-    background-image: url('/0.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-color: #000;
+    color: white;
+}
+
+/* Apply bg + overflow-hidden ONLY when body has .home-page class */
+body.home-page {
+    background-image: url('/0.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    color:white;
+}
+
+/* Landing pages need scroll and no background image */
+body.editorial-page {
+    background: none;
+    background-color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+    min-height: 100vh;
+    color: inherit;
 }
 
 
@@ -300,21 +316,21 @@ span{
     }
 }
 @media (max-width: 768px) {
-    html, body {
+    html, body.home-page {
         width: 100%;
         min-height: 100svh;
         margin: 0;
         padding: 0;
-        overflow-x: hidden; /* Prevents horizontal scroll */
-        overflow-y: hidden; /* Disable vertical scroll on mobile */
+        overflow-x: hidden;
+        overflow-y: hidden;
         background-size: cover;
         background-position: center center;
     }
 
     /* New rule for background image below 768px */
-    body {
-        background-image: url('/1.jpg'); /* Use the smaller image */
-        background-size: cover; /* Ensure it covers the background */
+    body.home-page {
+        background-image: url('/1.jpg');
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }

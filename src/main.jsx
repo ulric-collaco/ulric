@@ -4,6 +4,26 @@ import { BrowserRouter, useLocation } from 'react-router-dom'
 import App from './App'
 import './App.css'
 
+const EDITORIAL_ROUTES = []
+const GAME_ROUTES = ['/game']
+
+function BodyClassSetter() {
+  const location = useLocation()
+
+  useEffect(() => {
+    const path = location.pathname
+    if (EDITORIAL_ROUTES.includes(path)) {
+      document.body.className = 'editorial-page'
+    } else if (GAME_ROUTES.includes(path)) {
+      document.body.className = 'game-page'
+    } else {
+      document.body.className = 'home-page'
+    }
+  }, [location])
+
+  return null
+}
+
 function AnalyticsTracker() {
   const location = useLocation()
 
@@ -21,6 +41,7 @@ function AnalyticsTracker() {
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <BodyClassSetter />
       <AnalyticsTracker />
       <App />
     </BrowserRouter>

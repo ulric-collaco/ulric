@@ -1,9 +1,7 @@
 import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 
-// ─────────────────────────────────────────────
-//  Palette – warm low-poly, Bruno Simon feel
-// ─────────────────────────────────────────────
+
 const C = {
   sky:        '#EFE0C2',
   ground:     '#D9C99A',
