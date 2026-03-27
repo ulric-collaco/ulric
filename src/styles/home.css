@@ -1,37 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
-
-:root {
-  --ed-bg:        #f9f9f7;
-  --ed-text:      #111111;
-  --ed-muted:     #666666;
-  --ed-line:      #d8d8d8;
-  --ed-accent:    #c52828;
-  --ed-card-bg:   #ffffff;
-  --ed-hover-bg:  #f0f0ee;
-
-  --ed-font-display: 'Cormorant Garamond', 'Georgia', serif;
-  --ed-font-body:    'Jost', 'Helvetica Neue', sans-serif;
-
-  --ed-page-pad:   clamp(18px, 4vw, 64px);
-  --ed-max-w:      1100px;
-  /* tighter vertical sections — no more vast empty space */
-  --ed-section-py: clamp(32px, 5vw, 64px);
-
-  --ed-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ed-duration: 0.3s;
-}
-
-/* ── Dark Mode ── */
-[data-theme="dark"] {
-  --ed-bg:        #111111;
-  --ed-text:      #e8e8e6;
-  --ed-muted:     #888888;
-  --ed-line:      #2a2a2a;
-  --ed-accent:    #e04040;
-  --ed-card-bg:   #1a1a1a;
-  --ed-hover-bg:  #1e1e1e;
-}
+/* Tokens imported globally via _tokens.css */
 
 /* ── Base Reset ── */
 .home-root {
@@ -59,6 +26,15 @@
   transition: color var(--ed-duration) var(--ed-ease);
 }
 .home-root a:hover { color: var(--ed-accent); }
+
+/* Override ThemeToggle fixed positioning when inside masthead */
+.ed-masthead .theme-toggle {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 44px;
+  z-index: 10;
+}
 
 /* Override global span color from App.css */
 .home-root span { color: inherit; }
@@ -95,8 +71,25 @@
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--ed-muted);
-  margin-bottom: 20px;
   display: block;
+}
+
+/* ── Section Header (Heroic scale for section starts) ── */
+.ed-section-header {
+  margin-bottom: clamp(40px, 6vw, 64px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ed-section-title {
+  font-family: var(--ed-font-display);
+  font-size: clamp(42px, 8vw, 72px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ed-text);
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -156,27 +149,7 @@
 }
 .ed-masthead-link:hover { color: var(--ed-accent); }
 
-.ed-theme-toggle {
-  background: none;
-  border: 1px solid var(--ed-line);
-  color: var(--ed-text);
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  transition: border-color var(--ed-duration) var(--ed-ease),
-              color var(--ed-duration) var(--ed-ease),
-              transform var(--ed-duration) var(--ed-ease);
-}
-.ed-theme-toggle:hover {
-  border-color: var(--ed-accent);
-  color: var(--ed-accent);
-  transform: rotate(15deg);
-}
+/* .ed-theme-toggle removed — now using ThemeToggle component */
 
 /* ═══════════════════════════════════════════════════════════════
    EDITION STRIP (thin rule below masthead with meta info)
@@ -312,8 +285,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--ed-line);
   border-radius: 50%;
   color: var(--ed-text);
@@ -326,24 +299,25 @@
   transform: translateY(-2px);
 }
 .ed-social-link svg {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
 /* ── Pull quote ── */
 .ed-pullquote {
-  margin: clamp(28px, 4vw, 48px) 0 0;
-  padding: 24px clamp(20px, 4vw, 48px);
+  margin: clamp(40px, 6vw, 64px) 0 0;
+  padding: 32px clamp(20px, 4vw, 48px);
   border-top: 1px solid var(--ed-line);
   border-bottom: 1px solid var(--ed-line);
   font-family: var(--ed-font-display);
-  font-size: clamp(18px, 2.5vw, 26px);
-  font-weight: 300;
+  font-size: clamp(24px, 4vw, 44px);
+  font-weight: 600;
   font-style: italic;
   color: var(--ed-text);
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   quotes: none;
 }
 
@@ -404,9 +378,10 @@
   border-top: 1px solid var(--ed-line);
 }
 
-.ed-year-section:first-child {
+.ed-year-section:first-of-type {
   border-top: none;
   padding-top: 0;
+  margin-top: 24px;
 }
 
 .ed-projects-list {
@@ -596,8 +571,8 @@
   .ed-hero-bio { max-width: 100%; font-size: 13px; }
 
   .ed-pullquote {
-    font-size: clamp(15px, 4.5vw, 19px);
-    padding: 18px 0;
+    font-size: clamp(20px, 6vw, 28px);
+    padding: 24px 0;
   }
   .ed-pullquote-br { display: none; }
 

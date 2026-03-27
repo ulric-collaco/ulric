@@ -40,7 +40,10 @@ export default function ProjectsSection() {
 
   return (
     <section className="ed-section ed-container">
-      <span className="ed-kicker">Selected Work</span>
+      <div className="ed-section-header">
+        <span className="ed-kicker">Index</span>
+        <h2 className="ed-section-title">Selected Work</h2>
+      </div>
 
       {activeYears.map((yearGroup, index) => (
         <div key={yearGroup.year} className="ed-year-section">

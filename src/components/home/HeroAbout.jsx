@@ -91,7 +91,7 @@ export default function HeroAbout() {
 
       {/* ── Pull quote ── */}
       <blockquote className="ed-pullquote">
-        &ldquo;Understand how things work,<br className="ed-pullquote-br" /> then make them work better.&rdquo;
+        &ldquo;Everything for a reason.&rdquo;
       </blockquote>
 
     </section>

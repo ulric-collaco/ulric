@@ -1,412 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL RESET — Minimal base styles only
+   Page-specific styles live in their own CSS files.
+   Design tokens live in styles/_tokens.css.
+   ═══════════════════════════════════════════════════════════════ */
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;
+  /* Let pages control their own font-size base */
+  -webkit-text-size-adjust: 100%;
 }
 
 html, body {
-    min-height: 100vh;
-    min-height: 100svh;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
 }
-
 
 body {
-    background-color: #000;
-    color: white;
+  background-color: var(--ed-bg, #f9f9f7);
+  color: var(--ed-text, #111111);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Apply bg + overflow-hidden ONLY when body has .home-page class */
-body.home-page {
-    background-image: url('/0.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+/* ── Scrollbar (subtle) ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Landing/home pages need scroll and no background image */
+/* ── Body class overrides for specific page types ── */
+body.game-page {
+  background-color: #000;
+  color: white;
+  overflow: hidden;
+}
+
 body.home-page {
-    background: none;
-    background-color: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: auto;
-    min-height: 100svh;
-    color: inherit;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100svh;
 }
 
 html:has(body.home-page) {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: auto;
 }
-
-
-header{
-    margin-top: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 9%;
-    background-color: transparent;
-    filter: drop-shadow(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
-
-.logo{
-    font-size: 3rem;
-    color: #A7B500;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.5s ease;
-}
-
-.logo:hover{
-    transform: scale(1.1);
-}
-
-nav a{
-    font-size: 1.8rem;
-    color: white;
-    margin-left: 4rem;
-    font-weight: 500;
-    transition: 0.3s ease;
-    border-bottom: 3px solid transparent;
-}
-
-nav a:hover,
-nav a.active{
-    color: #A7B500;
-    border-bottom: 3px solid #A7B500;
-}
-
-@media(max-width:995px){
-    nav{
-        position: absolute;
-        display: none;
-        top: 0;
-        right: 0;
-        width: 40%;
-        border-left: 3px solid #A7B500;
-        border-bottom: 3px solid #A7B500;
-        border-bottom-left-radius: 2rem;
-        padding: 1rem solid;
-        background-color: #161616;
-        border-top: 0.1rem solid rgba(0,0,0,0.1);
-    }
-
-    nav.active{
-        display: block;
-    }
-
-    nav a{
-        display: block;
-        font-size: 2rem;
-        margin: 3rem 0;
-    }
-
-    nav a:hover,
-    nav a.active{
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-bottom: 0.5rem solid #A7B500;
-    }
-}
-
-section{
-    min-height: 100vh;
-    padding: 5rem 9% 5rem;
-}
-
-.home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8rem;
-    width: 100%; 
-    min-height: 100vh; 
-    min-height: 100svh; 
-    position: relative; 
-    overflow: hidden;
-    padding: 0; /* override section default padding to avoid bottom gap */
-}
-
-/* Background canvas overlay for home */
-.home .home-bg{
-    position: absolute;
-    inset: 0;
-    z-index: 0; /* behind content but above page background */
-    pointer-events: none; /* do not block interactions */
-}
-
-.home .home-content,
-.home .home-img{
-    position: relative;
-    z-index: 1;
-}
-
-.home .home-content h1{
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 1.3;
-}
-
-span{
-    color: #A7B500;
-}
-
-.home-content h3{
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.home-content p{
-    font-size: 1.6rem;
-}
-
-.home-img{
-    border-radius: 50%;
-}
-
-.home-img img{
-    position: relative;
-    width: 32vw;
-    border-radius: 50%;
-    box-shadow: 0 0 25px solid #A7B500;
-    cursor: pointer;
-    transition: 0.2s linear;
-}
-
-.home-img img:hover{
-    font-size: 1.8rem;
-    font-weight: 500;
-}
-
-.social-icons a{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 4rem;
-    height: 4rem;
-    background-color: transparent;
-    border: 0.2rem solid #A7B500;
-    font-size: 2rem;
-    border-radius: 50%;
-    margin: 3rem 1.5rem 3rem 0;
-    transition: 0.3s ease;
-    color: #A7B500;
-}
-
-.social-icons a:hover{
-    color: black;
-    transform: scale(1.3) translateY(-5px);
-    background-color: #A7B500;
-    box-shadow: 0  0 25px #A7B500;
-}
-
-.btn{
-    display: inline-block;
-    padding: 1rem 2.8rem;
-    border-radius: 4rem;
-    font-size: 1.6rem;
-    color: #A7B500;
-    letter-spacing: 0.3rem;
-    font-weight: 600;
-    border: 2px solid #A7B500;
-    transition: 0.3s ease;
-    cursor: pointer;
-}
-
-.btn:hover{
-    transform: scale3d(1.03);
-    background-color: #A7B500;
-    color: black;
-    box-shadow: 0 0 25px #A7B500;
-}
-
-.typing-text{
-    font-size: 34px;
-    font-weight: 600;
-    min-width: 280px;
-}
-
-.typing-text span{
-    position: relative;
-}
-
-.typing-text span::before{
-    content: "software Developer";
-    color: #A7B500;
-    animation: words 20s infinite;
-}
-
-.typing-text span::after{
-    content: "";
-
-    position: absolute;
-    width: calc(100% + 8px);
-    height: 100%;
-    border-left: 3px solid black;
-
-    animation: cursor 0.6s infinite;
-}
-
-@keyframes cursor {
-    0% { border-left: 3px solid black; }
-    50% { border-left: 3px solid transparent; }
-    100% { border-left: 3px solid #A7B500; }
-}
-
-@keyframes words{
-
-    0%, 25%{
-        content: "Developer";
-    }
-    25%, 50%{
-        content: "Cinephile";
-    }
-    50%, 75%{
-        content: "Ui/Ux Designer";
-    }
-    75%, 100%{
-        content: "Gamer";
-    }
-
-}
-
-@media (max-width: 1000px){
-    .home{
-        gap: 4rem;
-    }
-}
-
-@media(max-width:995px){
-    .home{
-        flex-direction: column;
-        margin: 0;
-    }
-
-    .home .home-content h3{
-        font-size: 2.5rem;
-    }
-
-    .home-content h1{
-        font-size: 5rem;
-    }
-
-    .home-img img{
-        width: 70vw;
-        margin-top: 4rem;
-    }
-}
-@media (max-width: 768px) {
-    html, body.home-page {
-        width: 100%;
-        min-height: 100svh;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        background-size: cover;
-        background-position: center center;
-    }
-
-    /* New rule for background image below 768px */
-    body.home-page {
-        background-image: url('/1.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .home {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 100svh;
-        width: 100%; /* Avoid 100vw scrollbar offset */
-        margin: 0; /* no external margins to prevent background gaps */
-        gap: 2rem; /* Tighter spacing on small screens */
-        padding: 0; /* remove padding to avoid any extra scroll */
-        box-sizing: border-box; /* Ensures padding doesn't add extra width */
-    }
-
-    .home-img img {
-        width: 40vw;
-        height: 40vw;
-        max-width: 160px;
-        max-height: 160px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 1rem; /* Prevents overlap */
-    }
-
-    .home-content {
-        width: 100%;
-        max-width: 480px; /* Centered readable width */
-        margin: 0 auto;
-        padding-bottom: 2rem; /* Prevents bottom whitespace */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-inline: 6vw; /* add breathing room on the sides */
-        box-sizing: border-box;
-    }
-
-    .home-content h1 {
-        font-size: 3rem;
-        white-space: wrap;
-        text-align: center;
-    }
-
-    .home-content h3 {
-        font-size: 2rem;
-    }
-
-    .home-content p {
-        font-size: 1.2rem;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Fix white bar issue */
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-}
-
-/* (nav/menu styles removed as nav bar is not used) */

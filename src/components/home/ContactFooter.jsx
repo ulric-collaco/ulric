@@ -12,7 +12,10 @@ const SOCIALS = [
 export default function ContactFooter() {
   return (
     <section className="ed-section ed-container">
-      <span className="ed-kicker">Connect</span>
+      <div className="ed-section-header">
+        <span className="ed-kicker">Connect</span>
+        <h2 className="ed-section-title">Get in Touch</h2>
+      </div>
 
       <div className="ed-contact-row">
         {SOCIALS.map((s) => (

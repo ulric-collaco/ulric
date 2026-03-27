@@ -1,0 +1,41 @@
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Single Source of Truth
+   Editorial Portfolio Design System (Theme 5: Minimal Monochrome Journal)
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+:root {
+  /* ── Colors ── */
+  --ed-bg:        #f9f9f7;
+  --ed-text:      #111111;
+  --ed-muted:     #666666;
+  --ed-line:      #d8d8d8;
+  --ed-accent:    #c52828;
+  --ed-card-bg:   #ffffff;
+  --ed-hover-bg:  #f0f0ee;
+
+  /* ── Typography ── */
+  --ed-font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --ed-font-body:    'Jost', 'Helvetica Neue', sans-serif;
+
+  /* ── Spacing ── */
+  --ed-page-pad:   clamp(18px, 4vw, 64px);
+  --ed-max-w:      1100px;
+  --ed-section-py: clamp(32px, 5vw, 64px);
+
+  /* ── Motion ── */
+  --ed-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ed-duration: 0.3s;
+}
+
+/* ── Dark Mode ── */
+[data-theme="dark"] {
+  --ed-bg:        #111111;
+  --ed-text:      #e8e8e6;
+  --ed-muted:     #888888;
+  --ed-line:      #2a2a2a;
+  --ed-accent:    #e04040;
+  --ed-card-bg:   #1a1a1a;
+  --ed-hover-bg:  #1e1e1e;
+}

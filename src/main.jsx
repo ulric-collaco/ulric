@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, useLocation } from 'react-router-dom'
 import App from './App'
+import './styles/_tokens.css'
 import './App.css'
 
 const GAME_ROUTES = ['/game']

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ThemeToggle from '../ThemeToggle'
 
 export default function Masthead({ isDark, onToggleTheme }) {
   return (
@@ -13,17 +14,13 @@ export default function Masthead({ isDark, onToggleTheme }) {
       </div>
 
       <div className="ed-masthead-right">
+        <Link to="/projects" className="ed-masthead-link">
+          Projects
+        </Link>
         <Link to="/game" className="ed-masthead-link">
           Game &rarr;
         </Link>
-        <button
-          className="ed-theme-toggle"
-          onClick={onToggleTheme}
-          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-          title={isDark ? 'Light mode' : 'Dark mode'}
-        >
-          {isDark ? '☀' : '☾'}
-        </button>
+        <ThemeToggle />
       </div>
     </header>
   )

@@ -5,3 +5,4 @@ dist/
 .agents/
 .agent/
 skills-lock.json
+design.md 
