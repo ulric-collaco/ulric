@@ -36,12 +36,7 @@ const ZONE_DATA = {
     links: [
       { name: 'GitHub',    url: 'https://github.com/ulric-collaco',                color: '#1a1a1a' },
       { name: 'Instagram', url: 'https://www.instagram.com/ulric_collaco/',          color: '#C13584' },
-      { name: 'LinkedIn',  url: 'https://www.linkedin.com/in/ulric-collaco/',        color: '#0077B5' },
     ],
-  },
-  playground: {
-    title: 'Playground',
-    message: 'Knock the colourful boxes around!\nTry driving up the yellow ramp for some air.',
   },
 }
 

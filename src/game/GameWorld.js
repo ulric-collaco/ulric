@@ -572,17 +572,31 @@ export default class GameWorld {
     const cx = 0, cz = 24
     const colors = ['#FF8A65','#FFD54F','#A5D6A7','#80DEEA','#CE93D8','#EF9A9A','#80CBC4']
 
-    // Stacked / scattered bumpable boxes
-    for (let i = 0; i < 18; i++) {
+    // Stacked / scattered bumpable boxes (InstancedMesh)
+    const numBoxes = 18;
+    const boxGeo = new THREE.BoxGeometry(1, 1, 1);
+    const boxMat = new THREE.MeshStandardMaterial({ roughness: 0.8, metalness: 0.1 });
+    const instMesh = new THREE.InstancedMesh(boxGeo, boxMat, numBoxes);
+    instMesh.castShadow = true;
+    instMesh.receiveShadow = true;
+    
+    const dummy = new THREE.Object3D();
+    const colorObj = new THREE.Color();
+    const physicsBodies = [];
+
+    for (let i = 0; i < numBoxes; i++) {
       const size  = 0.8 + Math.random() * 1.0
       const x     = cx + (Math.random() - 0.5) * 14
       const z     = cz + (Math.random() - 0.5) * 12
       const y     = size / 2 + 0.05
       const color = colors[Math.floor(Math.random() * colors.length)]
 
-      const mesh = makeBox(size, size, size, color)
-      mesh.position.set(x, y, z)
-      this.scene.add(mesh)
+      dummy.position.set(x, y, z);
+      dummy.scale.set(size, size, size);
+      dummy.updateMatrix();
+      instMesh.setMatrixAt(i, dummy.matrix);
+      colorObj.set(color);
+      instMesh.setColorAt(i, colorObj);
 
       const body = new CANNON.Body({
         mass: 6 + Math.random() * 12,
@@ -592,8 +606,16 @@ export default class GameWorld {
         angularDamping: 0.6,
       })
       this.world.addBody(body)
-      this.syncPairs.push({ body, mesh })
+      physicsBodies.push(body);
     }
+    
+    this.scene.add(instMesh);
+    this.syncPairs.push({
+      isInstanced: true,
+      mesh: instMesh,
+      bodies: physicsBodies,
+      dummy: dummy
+    });
 
     // Ramp
     const ramp = makeBox(8, 0.35, 6, '#FFCC02')
@@ -616,22 +638,48 @@ export default class GameWorld {
   //  Zone visual marker (ring on ground)
   // ──────────────────────────────────────────
   _addZoneMarker(cx, cz, color, label) {
-    // Outer ring
-    const ring = new THREE.Mesh(
-      new THREE.RingGeometry(8.5, 9.3, 72),
-      new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.0, transparent: true, opacity: 0.55, side: THREE.DoubleSide }),
-    )
-    ring.rotation.x = -Math.PI / 2
-    ring.position.set(cx, 0.03, cz)
-    this.scene.add(ring)
-    // Inner dashed ring  (thinner)
-    const innerRing = new THREE.Mesh(
-      new THREE.RingGeometry(7.6, 7.9, 72),
-      new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.0, transparent: true, opacity: 0.25, side: THREE.DoubleSide }),
-    )
-    innerRing.rotation.x = -Math.PI / 2
-    innerRing.position.set(cx, 0.03, cz)
-    this.scene.add(innerRing)
+    const rgb = new THREE.Color(color);
+    const uniforms = {
+      uColor: { value: new THREE.Vector3(rgb.r, rgb.g, rgb.b) },
+      uTime: { value: 0 }
+    };
+    const shaderMat = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader: `
+        varying vec2 vUv;
+        void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
+      `,
+      fragmentShader: `
+        uniform float uTime;
+        uniform vec3 uColor;
+        varying vec2 vUv;
+        void main() {
+          vec2 centeredUv = vUv - 0.5;
+          float dist = length(centeredUv);
+          
+          float outer = smoothstep(0.46, 0.43, dist) * smoothstep(0.4, 0.43, dist);
+          float inner = smoothstep(0.35, 0.33, dist) * smoothstep(0.31, 0.33, dist);
+          
+          float angle = atan(centeredUv.y, centeredUv.x);
+          float dash = sin(angle * 30.0 + uTime * 2.0) > 0.0 ? 1.0 : 0.2;
+          float scanline = sin(dist * 100.0 - uTime * 5.0) * 0.5 + 0.5;
+          
+          float alpha = (outer + inner * dash) * (0.5 + scanline * 0.5);
+          gl_FragColor = vec4(uColor * 1.5, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+    
+    if (!this.shaders) this.shaders = [];
+    this.shaders.push(uniforms);
+
+    const ring = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), shaderMat);
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.set(cx, 0.03, cz);
+    this.scene.add(ring);
   }
 
   // ──────────────────────────────────────────
@@ -764,11 +812,11 @@ export default class GameWorld {
     })
 
     // Wheels — high-res with hub detail
-    const wheelGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.3, 24)
+    const wheelGeo = new THREE.CylinderGeometry(0.40, 0.40, 0.34, 24)
     const wheelMat = new THREE.MeshStandardMaterial({ color: C.carWheel, roughness: 0.92, metalness: 0.05 })
     const hubMat   = new THREE.MeshStandardMaterial({ color: '#888', roughness: 0.25, metalness: 0.85 })
-    const hubGeo   = new THREE.CylinderGeometry(0.14, 0.14, 0.32, 16)
-    const lug1Geo  = new THREE.CylinderGeometry(0.03, 0.03, 0.32, 8)
+    const hubGeo   = new THREE.CylinderGeometry(0.18, 0.18, 0.36, 16)
+    const lug1Geo  = new THREE.CylinderGeometry(0.04, 0.04, 0.36, 8)
     const wheelPos = [
       [-0.95, -0.22,  1.0],
       [ 0.95, -0.22,  1.0],
@@ -930,9 +978,23 @@ export default class GameWorld {
     this.world.step(1 / 60, delta, 3)
 
     // Sync dynamic bodies → meshes
-    for (const { body, mesh } of this.syncPairs) {
-      mesh.position.copy(body.position)
-      mesh.quaternion.copy(body.quaternion)
+    for (const pair of this.syncPairs) {
+      if (pair.isInstanced) {
+        for (let i = 0; i < pair.bodies.length; i++) {
+          pair.dummy.position.copy(pair.bodies[i].position)
+          pair.dummy.quaternion.copy(pair.bodies[i].quaternion)
+          pair.dummy.updateMatrix()
+          pair.mesh.setMatrixAt(i, pair.dummy.matrix)
+        }
+        pair.mesh.instanceMatrix.needsUpdate = true
+      } else {
+        pair.mesh.position.copy(pair.body.position)
+        pair.mesh.quaternion.copy(pair.body.quaternion)
+      }
+    }
+    
+    if (this.shaders) {
+      this.shaders.forEach(u => u.uTime.value += delta);
     }
 
     this._updateCar(delta)
@@ -947,7 +1009,7 @@ export default class GameWorld {
   //  Car physics update
   // ──────────────────────────────────────────
   _updateCar(delta) {
-    const MAX_SPEED  = 12   // m/s
+    const MAX_SPEED  = 25   // m/s
     const ACCEL_LERP = 0.18  // fraction per frame toward target speed
     const TURN_RATE  = 2.0   // rad/s max yaw rate
     const LATERAL_DAMP = 0.82 // kills sideways sliding each frame
@@ -986,11 +1048,19 @@ export default class GameWorld {
       wFwd.z * newSpeed + wRight.z * newLateral,
     )
 
-    // Steering: direct angular velocity on Y
-    const speedSign = speed >= 0 ? 1 : -1
-    if (Math.abs(turn) > 0.02 && Math.abs(speed) > 0.3) {
-      this.carBody.angularVelocity.y =
-        turn * speedSign * TURN_RATE * Math.min(Math.abs(speed) / 3, 1)
+    // ── Steering direction ── STABLE intent-first flag, never flips from speed jitter ──
+    // Priority: key being held > actual speed > last known direction (no blind flip)
+    if (!this._steerDir) this._steerDir = 1
+    if      (fwd >  0.05) this._steerDir =  1   // pressing forward  → turn normally
+    else if (fwd < -0.05) this._steerDir = -1   // pressing reverse  → invert turn
+    else if (speed >  1.0) this._steerDir =  1  // coasting forward
+    else if (speed < -1.0) this._steerDir = -1  // coasting backward
+    // else: stationary — keep last direction, no jitter flip
+
+    if (Math.abs(turn) > 0.02) {
+      // High boost at low speed so the car pivots quickly
+      const boost = Math.abs(speed) < 1.5 ? 8.0 : 1.0
+      this.carBody.angularVelocity.y = turn * this._steerDir * TURN_RATE * boost
     } else {
       this.carBody.angularVelocity.y *= 0.7  // snap steering back
     }
@@ -1095,14 +1165,19 @@ export default class GameWorld {
 
     // Dispose all GPU resources
     this.scene.traverse((obj) => {
-      if (obj.isMesh) {
-        obj.geometry.dispose()
-        const mats = Array.isArray(obj.material) ? obj.material : [obj.material]
-        mats.forEach((m) => {
-          if (m.map)              m.map.dispose()
-          if (m.emissiveMap)      m.emissiveMap.dispose()
-          m.dispose()
-        })
+      if (obj.isMesh || obj.isInstancedMesh) {
+        if (obj.geometry) obj.geometry.dispose()
+        if (obj.material) {
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material]
+          mats.forEach((m) => {
+            if (m.map)              m.map.dispose()
+            if (m.emissiveMap)      m.emissiveMap.dispose()
+            if (m.normalMap)        m.normalMap.dispose()
+            if (m.roughnessMap)     m.roughnessMap.dispose()
+            if (m.metalnessMap)     m.metalnessMap.dispose()
+            m.dispose()
+          })
+        }
       }
     })
 
