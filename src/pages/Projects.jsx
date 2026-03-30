@@ -40,6 +40,22 @@ const PROJECTS = [
     imageCaption: 'HonestBite dashboard — scan products for nutrition truth',
     deployedUrl: 'https://honestbite.vercel.app/',
   },
+  {
+    headline: 'personal-ssh',
+    subhead: 'Try it: ssh ssh.ulriccollaco.me — a full portfolio in your terminal, no browser needed.',
+    body: 'Built with Go, Bubbletea, and Lipgloss, this interactive portfolio runs inside a PTY over an anonymous public SSH connection. It features animated ASCII art, twinkling star particles, a shimmer effect, theme cycling, and a multi-scene navigation system — all served from a GCP VM via a custom rate-limited SSH wrapper.',
+    tags: ['Go', 'Bubbletea', 'Lipgloss', 'GCP'],
+    issue: 'Issue 03',
+    category: 'Infrastructure',
+    date: '2026',
+    type: 'ssh ssh.ulriccollaco.me',
+    url: 'https://www.linkedin.com/posts/ulric-collaco_golang-tui-ssh-activity-7441546684133806080-r2e9?utm_source=social_share_send&utm_medium=member_desktop_web',
+    linkLabel: 'Read on LinkedIn',
+    image: '/images/ssh-tui-cover.png',
+    imageCaption: 'personal-ssh - terminal view',
+    deployedUrl: 'https://github.com/ulric-collaco/personal-ssh',
+    deployedLabel: 'GitHub Repo',
+  },
 ]
 
 /* ── Tilt classes for the "casually stacked clippings" effect ── */
@@ -143,7 +159,7 @@ function NewspaperClipping({ project, index }) {
               rel="noopener noreferrer"
               className="prj-article-link"
             >
-              Live Demo
+              {project.deployedLabel || 'Live Demo'}
               <span className="prj-article-link-arrow" aria-hidden="true">→</span>
             </a>
           )}
@@ -202,8 +218,7 @@ export default function Projects() {
           Projects<br />Archive
         </h1>
         <p className="prj-hero-deck">
-          A curated collection of builds, experiments, and engineering endeavours &mdash;
-          each entry a chapter in an ongoing journal of learning.
+          A collection of smaller projects and experiments
         </p>
         <hr className="prj-hero-rule" />
       </section>
