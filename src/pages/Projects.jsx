@@ -56,6 +56,22 @@ const PROJECTS = [
     deployedUrl: 'https://github.com/ulric-collaco/personal-ssh',
     deployedLabel: 'GitHub Repo',
   },
+  {
+    headline: 'Pastry',
+    subhead: 'Your universal cross-device clipboard & file sync. Edge-fast, privacy-first.',
+    body: 'A secure tool for syncing text and files across devices instantly. Built with Cloudflare Workers for the backend API and D1 for persistent storage, with a React frontend that uses a secure passcode system to keep synced data transient yet accessible.',
+    tags: ['React', 'Cloudflare Workers', 'D1', 'System Design'],
+    issue: 'Issue 04',
+    category: 'Full-stack',
+    date: '2025',
+    type: 'Deployed',
+    url: 'https://www.linkedin.com/posts/ulric-collaco_systemdesign-cloudflare-privacy-activity-7444475657025368064-6EBk?utm_source=social_share_send&utm_medium=member_desktop_web',
+    linkLabel: 'Read on LinkedIn',
+    image: '/images/pastry-clipping.png',
+    imageCaption: 'Pastry — cross-device sync dashboard',
+    deployedUrl: 'https://paste.ulriccollaco.me',
+    deployedLabel: 'Live Demo',
+  },
 ]
 
 /* ── Tilt classes for the "casually stacked clippings" effect ── */
