@@ -13,10 +13,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background var(--ed-duration) var(--ed-ease),
-              color var(--ed-duration) var(--ed-ease);
+    color var(--ed-duration) var(--ed-ease);
 }
 
-.home-root *, .home-root *::before, .home-root *::after {
+.home-root *,
+.home-root *::before,
+.home-root *::after {
   box-sizing: border-box;
 }
 
@@ -25,7 +27,10 @@
   text-decoration: none;
   transition: color var(--ed-duration) var(--ed-ease);
 }
-.home-root a:hover { color: var(--ed-accent); }
+
+.home-root a:hover {
+  color: var(--ed-accent);
+}
 
 /* Override ThemeToggle fixed positioning when inside masthead */
 .ed-masthead .theme-toggle {
@@ -37,13 +42,20 @@
 }
 
 /* Override global span color from App.css */
-.home-root span { color: inherit; }
-.home-root span.ed-hero-name-accent { color: var(--ed-accent); }
+.home-root span {
+  color: inherit;
+}
+
+.home-root span.ed-hero-name-accent {
+  color: var(--ed-accent);
+}
 
 .home-root h1,
 .home-root h2,
 .home-root h3,
-.home-root p { margin: 0; }
+.home-root p {
+  margin: 0;
+}
 
 /* Override global section from App.css that causes huge empty gaps */
 .home-root section {
@@ -108,7 +120,11 @@
   transition: background var(--ed-duration) var(--ed-ease);
 }
 
-.ed-masthead-left { display: flex; align-items: center; gap: 12px; }
+.ed-masthead-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
 .ed-masthead-logo {
   font-family: var(--ed-font-display);
@@ -147,7 +163,10 @@
   cursor: pointer;
   transition: color var(--ed-duration) var(--ed-ease);
 }
-.ed-masthead-link:hover { color: var(--ed-accent); }
+
+.ed-masthead-link:hover {
+  color: var(--ed-accent);
+}
 
 /* .ed-theme-toggle removed — now using ThemeToggle component */
 
@@ -183,7 +202,8 @@
 .ed-hero {
   padding-top: 28px;
   padding-bottom: var(--ed-section-py);
-  border-top: none; /* edition strip replaces the top border */
+  border-top: none;
+  /* edition strip replaces the top border */
 }
 
 .ed-hero-grid {
@@ -214,7 +234,10 @@
   transition: filter 0.6s var(--ed-ease);
   display: block;
 }
-.ed-hero-photo-wrap:hover .ed-hero-photo { filter: grayscale(0%); }
+
+.ed-hero-photo-wrap:hover .ed-hero-photo {
+  filter: grayscale(0%);
+}
 
 .ed-hero-content {
   display: flex;
@@ -233,7 +256,9 @@
   margin: 0;
 }
 
-.ed-hero-name-accent { color: var(--ed-accent); }
+.ed-hero-name-accent {
+  color: var(--ed-accent);
+}
 
 .ed-hero-tagline {
   font-family: var(--ed-font-display);
@@ -293,11 +318,13 @@
   transition: all var(--ed-duration) var(--ed-ease);
   cursor: pointer;
 }
+
 .ed-social-link:hover {
   border-color: var(--ed-accent);
   color: var(--ed-accent);
   transform: translateY(-2px);
 }
+
 .ed-social-link svg {
   width: 18px;
   height: 18px;
@@ -342,6 +369,7 @@
   transition: all var(--ed-duration) var(--ed-ease);
   cursor: default;
 }
+
 .ed-skill-tag:hover {
   border-color: var(--ed-accent);
   color: var(--ed-accent);
@@ -401,11 +429,14 @@
   color: var(--ed-text);
   transition: background var(--ed-duration) var(--ed-ease);
   cursor: pointer;
-  margin-inline: -12px; /* Pull it out slightly so the inner content aligns perfectly with grid */
+  margin-inline: -12px;
+  /* Pull it out slightly so the inner content aligns perfectly with grid */
 }
+
 .ed-project-row:hover {
   background: var(--ed-hover-bg);
 }
+
 .ed-project-row:hover .ed-project-arrow {
   transform: translateX(6px);
   color: var(--ed-accent);
@@ -419,7 +450,10 @@
   transition: filter 0.4s var(--ed-ease);
   display: block;
 }
-.ed-project-row:hover .ed-project-thumb { filter: grayscale(0%); }
+
+.ed-project-row:hover .ed-project-thumb {
+  filter: grayscale(0%);
+}
 
 .ed-project-info h3 {
   font-family: var(--ed-font-display);
@@ -428,6 +462,7 @@
   margin: 0 0 4px;
   line-height: 1.2;
 }
+
 .ed-project-info p {
   font-family: var(--ed-font-body);
   font-size: 12px;
@@ -441,7 +476,7 @@
   font-size: 22px;
   color: var(--ed-muted);
   transition: transform var(--ed-duration) var(--ed-ease),
-              color var(--ed-duration) var(--ed-ease);
+    color var(--ed-duration) var(--ed-ease);
 }
 
 .ed-coming-soon {
@@ -477,6 +512,7 @@
   display: inline-flex;
   align-items: center;
 }
+
 .ed-contact-link:hover {
   border-color: var(--ed-accent);
   color: var(--ed-accent);
@@ -497,6 +533,7 @@
   display: inline-flex;
   align-items: center;
 }
+
 .ed-resume-btn:hover {
   background: transparent;
   color: var(--ed-accent);
@@ -521,20 +558,33 @@
 
 /* Tablet */
 @media (max-width: 900px) {
-  .ed-masthead { grid-template-columns: 1fr 1fr; }
-  .ed-masthead-center { display: none; }
+  .ed-masthead {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ed-masthead-center {
+    display: none;
+  }
 
   .ed-hero-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
+
   .ed-hero-photo-wrap {
     max-height: 360px;
     aspect-ratio: 4 / 3;
   }
 
-  .ed-project-row { grid-template-columns: 96px 1fr auto; gap: 14px; }
-  .ed-project-thumb { width: 96px; height: 60px; }
+  .ed-project-row {
+    grid-template-columns: 96px 1fr auto;
+    gap: 14px;
+  }
+
+  .ed-project-thumb {
+    width: 96px;
+    height: 60px;
+  }
 }
 
 /* Mobile */
@@ -543,9 +593,19 @@
     grid-template-columns: 1fr auto;
     padding: 12px var(--ed-page-pad);
   }
-  .ed-masthead-logo { font-size: 15px; }
-  .ed-masthead-right { gap: 10px; }
-  .ed-masthead-link { font-size: 9px; letter-spacing: 0.12em; }
+
+  .ed-masthead-logo {
+    font-size: 15px;
+  }
+
+  .ed-masthead-right {
+    gap: 10px;
+  }
+
+  .ed-masthead-link {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
 
   /* ── Name ABOVE photo on mobile ── */
   .ed-hero-grid {
@@ -555,28 +615,49 @@
   }
 
   /* Extracting name from flow and putting it first */
-  .ed-hero-grid > .ed-hero-mobile-title {
+  .ed-hero-grid>.ed-hero-mobile-title {
     display: block;
     margin-bottom: 4px;
   }
 
   /* Content (bio, etc) goes below photo */
-  .ed-hero-photo-wrap { order: 2; width: 100%; aspect-ratio: auto; max-height: none; }
-  .ed-hero-content { order: 3; }
-  .ed-hero-name.ed-hide-mobile, 
-  .ed-hero-tagline.ed-hide-mobile { display: none; }
+  .ed-hero-photo-wrap {
+    order: 2;
+    width: 100%;
+    aspect-ratio: auto;
+    max-height: none;
+  }
 
-  .ed-hero-name { font-size: clamp(44px, 13vw, 64px); }
+  .ed-hero-content {
+    order: 3;
+  }
 
-  .ed-hero-bio { max-width: 100%; font-size: 13px; }
+  .ed-hero-name.ed-hide-mobile,
+  .ed-hero-tagline.ed-hide-mobile {
+    display: none;
+  }
+
+  .ed-hero-name {
+    font-size: clamp(44px, 13vw, 64px);
+  }
+
+  .ed-hero-bio {
+    max-width: 100%;
+    font-size: 13px;
+  }
 
   .ed-pullquote {
     font-size: clamp(20px, 6vw, 28px);
     padding: 24px 0;
   }
-  .ed-pullquote-br { display: none; }
 
-  .ed-edition-strip { gap: 6px; }
+  .ed-pullquote-br {
+    display: none;
+  }
+
+  .ed-edition-strip {
+    gap: 6px;
+  }
 
   /* Projects — no thumbnail on mobile */
   .ed-project-row {
@@ -584,12 +665,23 @@
     gap: 8px;
     padding: 16px 0;
   }
-  .ed-project-thumb { display: none; }
-  .ed-project-info h3 { font-size: 16px; }
+
+  .ed-project-thumb {
+    display: none;
+  }
+
+  .ed-project-info h3 {
+    font-size: 16px;
+  }
 
   /* Contact */
-  .ed-contact-row { flex-direction: column; align-items: stretch; }
-  .ed-contact-link, .ed-resume-btn {
+  .ed-contact-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ed-contact-link,
+  .ed-resume-btn {
     text-align: center;
     justify-content: center;
   }
@@ -603,7 +695,9 @@
 
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .home-root, .home-root * {
+
+  .home-root,
+  .home-root * {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }

@@ -39,3 +39,11 @@
   --ed-card-bg:   #1a1a1a;
   --ed-hover-bg:  #1e1e1e;
 }
+
+/* ── Stacking Card Utilities (used by StackingCards.jsx) ── */
+.stacking-item-wrapper { height: 100%; }
+.sticky { position: sticky; }
+.top-0  { top: 0; }
+.origin-top { transform-origin: top; }
+.relative { position: relative; }
+.h-full { height: 100%; }

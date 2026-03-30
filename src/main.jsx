@@ -6,6 +6,7 @@ import './styles/_tokens.css'
 import './App.css'
 
 const GAME_ROUTES = ['/game']
+const STACKING_ROUTES = ['/projects']
 
 function BodyClassSetter() {
   const location = useLocation()
@@ -14,6 +15,9 @@ function BodyClassSetter() {
     const path = location.pathname
     if (GAME_ROUTES.includes(path)) {
       document.body.className = 'game-page'
+    } else if (STACKING_ROUTES.includes(path)) {
+      // Projects page uses position: sticky — overflow-x: hidden breaks it
+      document.body.className = 'projects-page'
     } else {
       document.body.className = 'home-page'
     }

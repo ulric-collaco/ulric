@@ -1,191 +1,122 @@
-/* Tokens imported globally via _tokens.css */
-/* Shared .ed-container and .ed-kicker defined in home.css */
-
 /* ═══════════════════════════════════════════════════════════════
-   OFFICIAL PROJECTS LAYOUT - THEME 5 (Minimal Monochrome Journal)
+   PROJECTS PAGE — Newspaper Clipping Stacking Cards
+   Editorial Portfolio Design System (Theme 5: Minimal Monochrome)
    ═══════════════════════════════════════════════════════════════ */
 
+
+/* ── Page Root ── */
 .projects-root {
   background: var(--ed-bg);
-  min-height: 100dvh;
+  height: 100dvh;
   color: var(--ed-text);
   font-family: var(--ed-font-body);
-  transition: background var(--ed-duration) var(--ed-ease), color var(--ed-duration) var(--ed-ease);
-  position: relative;
-  overflow-x: hidden;
+  font-weight: 300;
+  line-height: 1.7;
+  transition: background var(--ed-duration) var(--ed-ease),
+              color var(--ed-duration) var(--ed-ease);
+  /* This is the scroll container — StackingCards reads scroll from this element */
   overflow-y: auto;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Hide scrollbar for cleaner look (scroll still works) */
+  scrollbar-width: none;
+  /* Masthead height token — used to offset sticky cards */
+  --masthead-h: 80px;
 }
 
-/* Header Section */
-.prj-header {
-  padding: 60px 0 40px;
-  border-bottom: 1px solid var(--ed-line);
-  margin-bottom: 40px;
+.projects-root::-webkit-scrollbar {
+  display: none;
 }
 
-.prj-title {
-  font-family: var(--ed-font-display);
-  font-size: clamp(60px, 12vw, 120px);
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  margin: 20px 0 0;
+.projects-root *,
+.projects-root *::before,
+.projects-root *::after {
+  box-sizing: border-box;
 }
 
-/* ── Major Projects (Editorial Structural) ── */
-.prj-major-list {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  margin-bottom: 60px;
-}
-
-.prj-major-card {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 40px;
-  align-items: center;
+.projects-root a {
+  color: inherit;
   text-decoration: none;
-  color: var(--ed-text);
-  padding-top: 30px;
-  border-top: 1px solid var(--ed-line);
-}
-
-.prj-major-image-wrap {
-  width: 100%;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  position: relative;
-  background: var(--ed-hover-bg);
-}
-
-.prj-major-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%);
-  transform: scale(1);
-  transition: filter 0.8s var(--ed-ease), transform 0.8s var(--ed-ease);
-}
-
-.prj-major-card:hover .prj-major-image {
-  filter: grayscale(0%);
-  transform: scale(1.03);
-}
-
-.prj-major-title {
-  font-family: var(--ed-font-display);
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 300;
-  margin: 16px 0 24px;
-  line-height: 1.1;
-}
-
-.prj-major-desc {
-  font-size: 16px;
-  font-weight: 300;
-  color: var(--ed-muted);
-  line-height: 1.6;
-}
-
-.prj-tag-list {
-  margin-top: 40px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.prj-tag {
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border: 1px solid var(--ed-line);
-  border-radius: 20px;
-  color: var(--ed-text);
-}
-
-/* ── Minor Projects (Interactive Grid / Bento) ── */
-.prj-minor-section {
-  padding: 40px 0 60px;
-  border-top: 1px solid var(--ed-line);
-}
-
-.prj-minor-grid {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  perspective: 1000px;
-}
-
-.prj-minor-card {
-  background: var(--ed-hover-bg);
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: var(--ed-text);
-  border: 1px solid transparent;
-  
-  /* 3D Tilt properties manipulated in JS */
-  transform-style: preserve-3d;
-  transition: transform 0.1s ease-out, border 0.3s ease;
-}
-
-.prj-minor-card:hover {
-  border-color: var(--ed-line);
-}
-
-.prj-minor-card h3 {
-  font-family: var(--ed-font-display);
-  font-size: 32px;
-  font-weight: 300;
-  margin: 0 0 12px;
-  transform: translateZ(30px);
-}
-
-.prj-minor-card p {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--ed-muted);
-  line-height: 1.5;
-  margin-bottom: 24px;
-  flex: 1;
-  transform: translateZ(20px);
-}
-
-.prj-minor-card .prj-tag {
-  align-self: flex-start;
-  transform: translateZ(40px);
-  background: var(--ed-bg);
-}
-
-/* ── Navigation Header ── */
-.prj-nav-header {
-  padding: 20px var(--ed-page-pad, clamp(20px, 5vw, 80px));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--ed-line);
-}
-
-.prj-nav-link {
-  text-decoration: none;
-  color: var(--ed-text);
-  font-family: var(--ed-font-body);
-  letter-spacing: 0.1em;
-  font-size: 14px;
-  text-transform: uppercase;
   transition: color var(--ed-duration) var(--ed-ease);
 }
-.prj-nav-link:hover {
+
+.projects-root a:hover {
   color: var(--ed-accent);
 }
 
-/* Override ThemeToggle fixed positioning when inside projects nav */
-.prj-nav-header .theme-toggle {
+.projects-root h1,
+.projects-root h2,
+.projects-root h3,
+.projects-root p {
+  margin: 0;
+}
+
+/* Override global section min-height from App.css */
+.projects-root section {
+  min-height: auto;
+}
+
+/* Override global span color */
+.projects-root span {
+  color: inherit;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION HEADER
+   ═══════════════════════════════════════════════════════════════ */
+.prj-masthead {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 16px var(--ed-page-pad);
+  border-bottom: 2px solid var(--ed-text);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ed-bg);
+  transition: background var(--ed-duration) var(--ed-ease);
+}
+
+.prj-masthead-left {
+  display: flex;
+  align-items: center;
+}
+
+.prj-masthead-back {
+  font-family: var(--ed-font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ed-text);
+  cursor: pointer;
+  transition: color var(--ed-duration) var(--ed-ease);
+}
+
+.prj-masthead-back:hover {
+  color: var(--ed-accent);
+}
+
+.prj-masthead-center {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.prj-masthead-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ThemeToggle override when inside masthead */
+.prj-masthead .theme-toggle {
   position: relative;
   top: auto;
   left: auto;
@@ -193,57 +124,481 @@
   z-index: 10;
 }
 
-/* ── Responsive: Tablet ── */
-@media (max-width: 900px) {
-  .prj-major-card {
-    grid-template-columns: 1fr;
-    gap: 30px;
+/* ═══════════════════════════════════════════════════════════════
+   PAGE HERO
+   ═══════════════════════════════════════════════════════════════ */
+.prj-hero {
+  max-width: var(--ed-max-w);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--ed-page-pad) clamp(32px, 4vw, 48px);
+}
+
+.prj-hero-kicker {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.prj-hero-title {
+  font-family: var(--ed-font-display);
+  font-size: clamp(48px, 10vw, 100px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ed-text);
+}
+
+.prj-hero-deck {
+  font-family: var(--ed-font-display);
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ed-muted);
+  margin-top: 20px;
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+.prj-hero-rule {
+  width: 100%;
+  height: 2px;
+  background: var(--ed-text);
+  border: none;
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STACKING CARDS CONTAINER
+   ═══════════════════════════════════════════════════════════════ */
+.prj-stack-wrapper {
+  /* No fixed height — full-page scroll */
+  position: relative;
+}
+
+/* Sticky wrapper — each card locks below the masthead */
+/* Sticky wrapper — each card locks below the masthead */
+.stacking-item-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: var(--masthead-h, 0px);
+}
+
+/* Spacer inside StackingCards — last card scrolls up this distance to lock */
+.prj-end-spacer {
+  height: 50dvh;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NEWSPAPER CLIPPING CARD
+   Each card mimics a broadsheet newspaper article clipping
+   ═══════════════════════════════════════════════════════════════ */
+.prj-clipping {
+  /* Fill exactly the space below the masthead — no clipping */
+  min-height: calc(100dvh - var(--masthead-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px var(--ed-page-pad);
+  /* Stick right below the masthead */
+  top: var(--masthead-h) !important;
+}
+
+.prj-clipping-inner {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  background: var(--ed-card-bg);
+  border: 1px solid var(--ed-line);
+  padding: clamp(28px, 5vw, 56px);
+  position: relative;
+  cursor: default;
+
+  /* Clean single-card shadow — the stacking happens via scroll */
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+
+  transition: box-shadow 0.4s var(--ed-ease),
+              border-color 0.4s var(--ed-ease),
+              transform 0.4s var(--ed-ease);
+}
+
+.prj-clipping-inner:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Article Header (Dateline + Issue) ── */
+.prj-article-dateline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ed-line);
+  margin-bottom: clamp(16px, 3vw, 28px);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prj-article-issue {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+}
+
+.prj-article-date {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+}
+
+/* ── Article Layout (2-column newspaper on desktop) ── */
+.prj-article-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+/* ── Large Index Number (watermark) ── */
+.prj-article-index {
+  font-family: var(--ed-font-display);
+  font-size: clamp(72px, 12vw, 140px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ed-line);
+  position: absolute;
+  top: clamp(20px, 3vw, 40px);
+  right: clamp(20px, 4vw, 48px);
+  pointer-events: none;
+  user-select: none;
+  transition: color var(--ed-duration) var(--ed-ease);
+}
+
+.prj-clipping-inner:hover .prj-article-index {
+  color: var(--ed-muted);
+}
+
+/* ── Headline ── */
+.prj-article-headline {
+  font-family: var(--ed-font-display);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ed-text);
+  margin-bottom: 8px;
+  max-width: 16ch;
+}
+
+/* ── Subhead / Deck ── */
+.prj-article-subhead {
+  font-family: var(--ed-font-display);
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ed-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* ── Body Text (newspaper column style) ── */
+.prj-article-text {
+  font-family: var(--ed-font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ed-text);
+  max-width: 48ch;
+}
+
+/* Column rule — thin vertical line between text and image */
+.prj-article-col-left {
+  position: relative;
+}
+
+/* ── Image Placeholder ── */
+.prj-article-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ed-hover-bg);
+  border: 1px solid var(--ed-line);
+}
+
+.prj-article-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(60%);
+  transition: filter 0.6s var(--ed-ease), transform 0.6s var(--ed-ease);
+  display: block;
+}
+
+.prj-clipping-inner:hover .prj-article-image {
+  filter: grayscale(10%);
+  transform: scale(1.02);
+}
+
+.prj-article-image-caption {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+  margin-top: 8px;
+  display: block;
+}
+
+/* ── Tech Tags (pills) ── */
+.prj-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.prj-article-tag {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--ed-line);
+  color: var(--ed-text);
+  transition: all var(--ed-duration) var(--ed-ease);
+  cursor: default;
+}
+
+.prj-article-tag:hover {
+  border-color: var(--ed-accent);
+  color: var(--ed-accent);
+}
+
+/* ── Article Footer (link) ── */
+.prj-article-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--ed-line);
+  margin-top: clamp(20px, 3vw, 32px);
+}
+
+.prj-article-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.prj-article-link {
+  font-family: var(--ed-font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ed-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color var(--ed-duration) var(--ed-ease);
+}
+
+.prj-article-link:hover {
+  color: var(--ed-accent);
+}
+
+.prj-article-link-arrow {
+  font-family: var(--ed-font-display);
+  font-size: 18px;
+  transition: transform var(--ed-duration) var(--ed-ease);
+  display: inline-block;
+}
+
+.prj-article-link:hover .prj-article-link-arrow {
+  transform: translateX(6px);
+}
+
+.prj-article-type {
+  font-family: var(--ed-font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ALTERNATE CARD TONES — subtle variation for stacked feel
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Alternate cards get a subtly warmer tone so stacked layers are distinct */
+.prj-clipping--alt .prj-clipping-inner {
+  background: var(--ed-hover-bg);
+  border-color: var(--ed-muted);
+}
+
+/* Slightly rotated cards for "casually stacked" feel */
+.prj-clipping--tilt-left .prj-clipping-inner {
+  transform: rotate(-0.4deg);
+}
+
+.prj-clipping--tilt-right .prj-clipping-inner {
+  transform: rotate(0.3deg);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+.prj-page-footer {
+  max-width: var(--ed-max-w);
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px) var(--ed-page-pad) clamp(16px, 2vw, 32px);
+}
+
+.prj-footer-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--ed-line);
+  border: none;
+  margin-bottom: 24px;
+}
+
+.prj-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--ed-font-body);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ed-muted);
+}
+
+.prj-footer-row a {
+  transition: color var(--ed-duration) var(--ed-ease);
+}
+
+.prj-footer-row a:hover {
+  color: var(--ed-accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 600px) {
+  .prj-article-body {
+    grid-template-columns: 1fr 1fr;
   }
-  .prj-minor-card {
-    padding: 30px;
+
+  /* Column rule between text and image */
+  .prj-article-col-left::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--ed-line);
+  }
+
+  .prj-article-col-left {
+    padding-right: clamp(16px, 3vw, 32px);
   }
 }
 
-/* ── Responsive: Mobile ── */
-@media (max-width: 600px) {
-  .prj-nav-header {
-    padding: 14px var(--ed-page-pad, 18px);
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — DESKTOP (≥ 900px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 900px) {
+  .prj-clipping-inner {
+    padding: clamp(40px, 5vw, 64px);
   }
-  .prj-nav-link {
-    font-size: 12px;
-    letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE (< 600px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 599px) {
+  .prj-masthead {
+    grid-template-columns: 1fr auto;
+    padding: 12px var(--ed-page-pad);
   }
-  .prj-header {
-    padding: 40px 0 24px;
-    margin-bottom: 24px;
+
+  .prj-masthead-center {
+    display: none;
   }
-  .prj-title {
-    font-size: clamp(40px, 12vw, 72px);
+
+  .prj-masthead-back {
+    font-size: 9px;
+    letter-spacing: 0.12em;
   }
-  .prj-major-list {
-    gap: 40px;
-    margin-bottom: 40px;
+
+  .projects-root {
+    --masthead-h: 68px;
   }
-  .prj-major-title {
-    font-size: clamp(24px, 7vw, 36px);
+
+  .prj-clipping {
+    padding: 16px var(--ed-page-pad);
+    height: auto;
+    min-height: calc(85dvh - var(--masthead-h));
   }
-  .prj-major-desc {
-    font-size: 14px;
+
+  .prj-clipping-inner {
+    padding: 24px 20px;
   }
-  .prj-tag-list {
-    margin-top: 24px;
+
+  .prj-article-index {
+    font-size: 56px;
+    top: 16px;
+    right: 20px;
   }
-  .prj-minor-section {
-    padding: 24px 0 40px;
+
+  .prj-article-headline {
+    max-width: 100%;
+    padding-right: 48px; /* avoid overlap with index number */
   }
-  .prj-minor-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
+
+  .prj-article-image-wrap {
+    aspect-ratio: 16 / 10;
   }
-  .prj-minor-card {
-    padding: 24px;
+
+  /* Remove tilt on mobile — keep it clean */
+  .prj-clipping--tilt-left .prj-clipping-inner,
+  .prj-clipping--tilt-right .prj-clipping-inner {
+    transform: none;
   }
-  .prj-minor-card h3 {
-    font-size: 24px;
+
+  .prj-footer-row {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .projects-root,
+  .projects-root * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
