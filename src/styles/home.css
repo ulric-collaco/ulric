@@ -104,6 +104,38 @@
   letter-spacing: -0.01em;
 }
 
+.ed-section-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ed-section-cta {
+  font-family: var(--ed-font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ed-text);
+  border: 1px solid var(--ed-line);
+  padding: 10px 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ed-duration) var(--ed-ease),
+    border-color var(--ed-duration) var(--ed-ease),
+    background var(--ed-duration) var(--ed-ease);
+}
+
+.ed-section-cta:hover {
+  color: var(--ed-accent);
+  border-color: var(--ed-accent);
+  background: var(--ed-hover-bg);
+}
+
 /* ═══════════════════════════════════════════════════════════════
    MASTHEAD
    ═══════════════════════════════════════════════════════════════ */
@@ -639,6 +671,17 @@
 
   .ed-hero-name {
     font-size: clamp(44px, 13vw, 64px);
+  }
+
+  .ed-section-title-row {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ed-section-cta {
+    font-size: 9px;
+    padding: 9px 14px;
+    letter-spacing: 0.16em;
   }
 
   .ed-hero-bio {

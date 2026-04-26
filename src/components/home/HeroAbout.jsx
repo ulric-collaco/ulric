@@ -71,13 +71,12 @@ export default function HeroAbout() {
           <p className="ed-hero-bio">
             {/* Replace this with your own bio when ready — aim for 80–120 words */}
             A passionate developer and curious learner, currently honing skills in
-            Python, systems programming with C and C++, and crafting intuitive
-            interfaces with Figma. Fascinated by cybersecurity and the low-level
+            Python, systems programming with C and C++. Fascinated by cybersecurity and the low-level
             mechanics of computing, every project is an opportunity to dig deeper.
             From building ESP32-powered hardware to self-hosted AI assistants,
             the goal is always the same — understand how things work, then make
             them work better. When not coding, you'll find me dissecting films,
-            exploring Linux distros, or pushing pixels in Figma. Always building.
+            exploring Linux distros or binging tv shows. Always building.
             Always learning.
           </p>
 
